@@ -23,6 +23,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+import { useSearch } from '@/hooks/use-search';
 import UserItem from './user-item';
 import Item from './item';
 import DocumentList from './document-list';
@@ -38,6 +39,7 @@ const Navigation = () => {
   const navbarRef = useRef<ElementRef<'div'>>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const onOpen = useSearch((store) => store.onOpen);
 
   // Collapse sidebar when resizing from desktop to mobile
   useEffect(() => {
@@ -145,7 +147,7 @@ const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item isSearch label='Search' icon={Search} onClick={() => {}} />
+          <Item isSearch label='Search' icon={Search} onClick={onOpen} />
           <Item label='Settings' icon={Settings} onClick={() => {}} />
           <Item onClick={handleCreate} label='New page' icon={PlusCircle} />
         </div>
