@@ -80,7 +80,7 @@ const Item = ({
     const promise = create({ title: 'Untitled', parentDocument: id }).then(
       (documentId) => {
         if (!expanded) onExpand?.();
-        // router.push(`/documents/${documentId}`);
+        router.push(`/documents/${documentId}`);
       }
     );
 
