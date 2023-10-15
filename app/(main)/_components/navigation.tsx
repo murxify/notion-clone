@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/popover';
 
 import { useSearch } from '@/hooks/use-search';
+import { useSettings } from '@/hooks/use-settings';
 import UserItem from './user-item';
 import Item from './item';
 import DocumentList from './document-list';
@@ -33,13 +34,14 @@ const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const create = useMutation(api.documents.create);
+  const onOpen = useSearch((store) => store.onOpen);
+  const settings = useSettings();
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<'aside'>>(null);
   const navbarRef = useRef<ElementRef<'div'>>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
-  const onOpen = useSearch((store) => store.onOpen);
 
   // Collapse sidebar when resizing from desktop to mobile
   useEffect(() => {
@@ -148,7 +150,7 @@ const Navigation = () => {
         <div>
           <UserItem />
           <Item isSearch label='Search' icon={Search} onClick={onOpen} />
-          <Item label='Settings' icon={Settings} onClick={() => {}} />
+          <Item label='Settings' icon={Settings} onClick={settings.onOpen} />
           <Item onClick={handleCreate} label='New page' icon={PlusCircle} />
         </div>
         <div className='mt-4'>
