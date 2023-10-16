@@ -3,13 +3,15 @@
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { useEdgeStore } from '@/lib/edgestore';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
 import { useCoverImage } from '@/hooks/use-cover-image';
+
 import { ImageIcon, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useEdgeStore } from '@/lib/edgestore';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface CoverProps {
   url?: string;
@@ -68,3 +70,7 @@ const Cover = ({ url, preview }: CoverProps) => {
 };
 
 export default Cover;
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className='w-full h-[12vh]' />;
+};
