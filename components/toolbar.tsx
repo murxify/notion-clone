@@ -8,6 +8,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { ImageIcon, Smile, X } from 'lucide-react';
 import IconPicker from './icon-picker';
 import { Button } from '@/components/ui/button';
+import { useCoverImage } from '@/hooks/use-cover-image';
 
 interface ToolbarProps {
   initialData: Doc<'documents'>;
@@ -21,6 +22,8 @@ const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  const coverImage = useCoverImage();
 
   const enableInput = () => {
     if (preview) return;
@@ -98,7 +101,7 @@ const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           <Button
             variant='outline'
             size='sm'
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             className='text-muted-foreground text-xs'
           >
             <ImageIcon className='h-4 w-4 mr-2' />
